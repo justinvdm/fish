@@ -1,0 +1,27 @@
+{
+  "name": "fish",
+  "version": "0.0.0",
+  "description": "a cli thing for sorting out personal finance",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "mocha -R spec tests/**/*.test.js"
+  },
+  "author": "justinvdm",
+  "license": "MIT",
+  "devDependencies": {
+    "mocha": "^1.21.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/justinvdm/fish.git"
+  },
+  "keywords": [
+    "personal finance"
+  ],
+  "dependencies": {
+    "csv": "^0.4.1",
+    "drainpipe": "^0.1.0",
+    "js-yaml": "^3.2.5",
+    "lodash": "^2.4.1"
+  }
+}
