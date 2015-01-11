@@ -1,6 +1,9 @@
 var vv = require('drainpipe'),
     assert = require('assert'),
-    fish = require('../src')
+    path = require('path'),
+    resolve = path.resolve,
+    fish = require('../src'),
+    csv = fish.csv
 
 
 describe("fish api", function() {
@@ -138,6 +141,40 @@ describe("fish api", function() {
             balance: -333
           }
         })
+    })
+  })
+
+  describe("fish.csv", function() {
+    it("should summarize data from a csv file", function(done) {
+      csv([
+        "description,amount",
+        "foo,3",
+        "bar,-23",
+        "baz,7",
+        "quux,-13"
+      ].join('\n'), {
+        tags: {
+          a: ['foo', 'bar'],
+          b: ['baz', 'quux']
+        }
+      }, function(err, result) {
+        if (err) return done(err)
+
+        assert.deepEqual(result, {
+          a: {
+            credit: 3,
+            debit: -23,
+            balance: -20
+          },
+          b: {
+            credit: 7,
+            debit: -13,
+            balance: -6
+          }
+        })
+
+        done()
+      })
     })
   })
 })

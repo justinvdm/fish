@@ -12,7 +12,7 @@ function normalizeFields(data, conf) {
 
   return map(data, function(d) {
     return {
-      amount: d[fields.amount],
+      amount: +d[fields.amount],
       description: d[fields.description]
     }
   })
