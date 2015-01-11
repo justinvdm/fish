@@ -6,7 +6,7 @@ a cli thing for sorting out personal finance
 ## install
 
 ```
-$ npm install fish
+$ npm install fish-js
 ```
 
 ## usage

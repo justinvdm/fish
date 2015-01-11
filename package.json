@@ -1,5 +1,5 @@
 {
-  "name": "fish",
+  "name": "fish-js",
   "version": "0.0.0",
   "description": "a cli thing for sorting out personal finance",
   "main": "src/index.js",
