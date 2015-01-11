@@ -9,7 +9,7 @@
   "author": "justinvdm",
   "license": "MIT",
   "devDependencies": {
-    "mocha": "^1.21.4"
+    "mocha": "^2.1.0"
   },
   "repository": {
     "type": "git",

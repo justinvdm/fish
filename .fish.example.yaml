@@ -2,7 +2,6 @@ fields:
   date: Date
   amount: Amount
   description: Description
-dateFormat: YYYY/MM/DD
 tags:
   food:
     - woolworths
