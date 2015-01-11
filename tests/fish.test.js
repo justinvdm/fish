@@ -7,37 +7,29 @@ describe("fish api", function() {
   describe("fish", function() {
     it("should summarize the data into tags", function() {
       vv([{
-          date: '1990/03/23',
-          description: 'foo',
-          amount: 123
+          amount: 123,
+          description: 'foo'
         }, {
-          date: '1990/04/24',
-          description: 'quux',
-          amount: -789
+          amount: -789,
+          description: 'quux'
         }, {
-          date: '1990/05/25',
-          description: 'baz',
-          amount: -345
+          amount: -345,
+          description: 'baz'
         }, {
-          date: '1990/06/26',
-          description: 'bar',
-          amount: 901
+          amount: 901,
+          description: 'bar'
         }, {
-          date: '1990/07/23',
-          description: 'baz',
-          amount: 123
+          amount: 123,
+          description: 'baz'
         }, {
-          date: '1990/08/24',
-          description: 'quux',
-          amount: -789
+          amount: -789,
+          description: 'quux'
         }, {
-          date: '1990/09/25',
-          description: 'bar',
-          amount: -345
+          amount: -345,
+          description: 'bar'
         }, {
-          date: '1990/10/26',
-          description: 'foo',
-          amount: 901
+          amount: 901,
+          description: 'foo'
         }])
         (fish, {
           tags: {
@@ -61,37 +53,29 @@ describe("fish api", function() {
 
     it("should summarize unaccounted data", function() {
       vv([{
-          date: '1990/03/23',
-          description: 'foo',
-          amount: 123
+          amount: 123,
+          description: 'foo'
         }, {
-          date: '1990/04/24',
-          description: 'quux',
-          amount: -789
+          amount: -789,
+          description: 'quux'
         }, {
-          date: '1990/05/25',
-          description: 'baz',
-          amount: -345
+          amount: -345,
+          description: 'baz'
         }, {
-          date: '1990/06/26',
-          description: 'bar',
-          amount: 901
+          amount: 901,
+          description: 'bar'
         }, {
-          date: '1990/07/23',
-          description: 'baz',
-          amount: 123
+          amount: 123,
+          description: 'baz'
         }, {
-          date: '1990/08/24',
-          description: 'quux',
-          amount: -789
+          amount: -789,
+          description: 'quux'
         }, {
-          date: '1990/09/25',
-          description: 'bar',
-          amount: -345
+          amount: -345,
+          description: 'bar'
         }, {
-          date: '1990/10/26',
-          description: 'foo',
-          amount: 901
+          amount: 901,
+          description: 'foo'
         }])
         (fish, {tags: {a: ['foo', 'bar']}})
         (assert.deepEqual, {
@@ -110,21 +94,17 @@ describe("fish api", function() {
 
     it("should ignore case when matching tag strings", function() {
       vv([{
-          date: '1990/03/23',
-          description: 'fOo',
-          amount: 123
+          amount: 123,
+          description: 'fOo'
         }, {
-          date: '1990/06/26',
-          description: 'bAr',
-          amount: 901
+          amount: 901,
+          description: 'bAr'
         }, {
-          date: '1990/09/25',
-          description: 'bar',
-          amount: -345
+          amount: -345,
+          description: 'bar'
         }, {
-          date: '1990/10/26',
-          description: 'foo',
-          amount: 901
+          amount: 901,
+          description: 'foo'
         }])
         (fish, {tags: {a: ['foo', 'bar']}})
         (assert.deepEqual, {
@@ -132,6 +112,30 @@ describe("fish api", function() {
             credit: 1925,
             debit: -345,
             balance: 1580
+          }
+        })
+    })
+
+    it("should support configurable field names", function() {
+      vv([{
+          name: 'foo',
+          rands: 123
+        }, {
+          name: 'bar',
+          rands: -456
+        }])
+        (fish, {
+          tags: {a: ['foo', 'bar']},
+          fields: {
+            amount: 'rands',
+            description: 'name'
+          }
+        })
+        (assert.deepEqual, {
+          a: {
+            credit: 123,
+            debit: -456,
+            balance: -333
           }
         })
     })

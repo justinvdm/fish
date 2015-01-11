@@ -1,5 +1,21 @@
+var lodash = require('lodash'),
+    map = lodash.map
+
+
 function normalize(data, conf) {
-  return data
+  return normalizeFields(data, conf)
+}
+
+
+function normalizeFields(data, conf) {
+  var fields = conf.fields
+
+  return map(data, function(d) {
+    return {
+      amount: d[fields.amount],
+      description: d[fields.description]
+    }
+  })
 }
 
 
