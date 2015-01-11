@@ -1,7 +1,5 @@
 var vv = require('drainpipe'),
     assert = require('assert'),
-    path = require('path'),
-    resolve = path.resolve,
     fish = require('../src'),
     csv = fish.csv
 
