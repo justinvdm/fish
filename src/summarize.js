@@ -2,7 +2,6 @@ var vv = require('drainpipe'),
     lodash = require('lodash'),
     map = lodash.map,
     uniq = lodash.uniq,
-    some = lodash.some,
     values = lodash.values
     reduce = lodash.reduce,
     filter = lodash.filter

@@ -17,13 +17,13 @@ function fish(data, conf) {
 }
 
 
-function csv(csv, conf, done) {
+function csv(data, conf, done) {
   if (arguments.length < 3) {
     done = conf
     conf = {}
   }
 
-  parse(csv, {columns: true}, function(err, data) {
+  parse(data, {columns: true}, function(err, data) {
     if (err) return done(err)
 
     var result
