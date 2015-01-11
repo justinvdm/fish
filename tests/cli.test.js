@@ -15,7 +15,7 @@ function run(cmd) {
 
 describe("fish cli", function() {
   it("should display the summary", function() {
-    var config = resolve(__dirname, 'fixtures/basic/.fish.yml')
+    var config = resolve(__dirname, 'fixtures/basic/.fish.yaml')
     var file = resolve(__dirname, 'fixtures/basic/data.csv')
 
     vv(str('--json -c %s %s', config, file))
