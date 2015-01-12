@@ -1,5 +1,4 @@
 fields:
-  date: Date
   amount: Amount
   description: Description
 tags:
