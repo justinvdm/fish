@@ -174,5 +174,28 @@ describe("fish api", function() {
         done()
       })
     })
+
+    it("should allow csv parse options to be given", function(done) {
+      csv([
+        "description|amount",
+        "foo|3",
+        "bar|-23",
+      ].join('\n'), {
+        tags: {a: ['foo', 'bar']},
+        csv: {delimiter: '|'}
+      }, function(err, result) {
+        if (err) return done(err)
+
+        assert.deepEqual(result, {
+          a: {
+            credit: 3,
+            debit: -23,
+            balance: -20
+          }
+        })
+
+        done()
+      })
+    })
   })
 })

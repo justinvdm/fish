@@ -23,7 +23,10 @@ function csv(data, conf, done) {
     conf = {}
   }
 
-  parse(data, {columns: true}, function(err, data) {
+  var opts = conf.csv || {}
+  opts.columns = true
+
+  parse(data, opts, function(err, data) {
     if (err) return done(err)
 
     var result

@@ -1,6 +1,8 @@
 fields:
   amount: Amount
   description: Description
+csv:
+  trim: true
 tags:
   food:
     - woolworths
