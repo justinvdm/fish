@@ -5,6 +5,7 @@ var argv = require('yargs'),
     read = require('fs').readFileSync,
     yaml = require('js-yaml').safeLoad,
     fish = require('./api').csv,
+    resolve = require('path').resolve,
     display = require('./display')
 
 
@@ -15,7 +16,7 @@ argv = argv
   .boolean('json')
   .describe('json', 'output the summary as json')
   .describe('c', 'path to config file')
-  .default('c', '.fish.yaml')
+  .default('c', resolve(process.env.HOME, '.fish.yaml'))
   .argv;
 
 
