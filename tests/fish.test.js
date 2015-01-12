@@ -52,6 +52,35 @@ describe("fish api", function() {
         })
     })
 
+
+    it("should not categorize a datum under more than one tag", function() {
+      vv([{
+          amount: 123,
+          description: 'foo'
+        }, {
+          amount: -789,
+          description: 'foo'
+        }])
+        (fish, {
+          tags: {
+            a: ['foo'],
+            b: ['foo']
+          }
+        })
+        (assert.deepEqual, {
+          a: {
+            credit: 123,
+            debit: -789,
+            balance: -666
+          },
+          b: {
+            credit: 0,
+            debit: 0,
+            balance: 0
+          }
+        })
+    })
+
     it("should summarize unaccounted data", function() {
       vv([{
           amount: 123,

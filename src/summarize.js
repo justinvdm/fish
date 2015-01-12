@@ -42,11 +42,14 @@ function summarizeGroup(data) {
 
 function group(data, tags) {
   return mapValues(tags, function(strings) {
-    return vv(strings)
+    var tagData = vv(strings)
       (map, function(s) { return matches(s, data) })
       (flatten)
       (uniq)
       ()
+
+    data = difference(data, tagData)
+    return tagData
   })
 }
 
