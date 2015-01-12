@@ -3,6 +3,7 @@ var vv = require('drainpipe'),
     each = require('lodash').each,
     reduce = require('lodash').reduce,
     chalk = require('chalk'),
+    numeral = require('numeral'),
     Table = require('cli-table')
 
 
@@ -56,7 +57,7 @@ function row(tag, summary) {
 
 
 function val(v) {
-  v = v.toString()
+  v = numeral(v).format('0,0.00')
   if (v > 0) return chalk.green(v)
   if (v < 0) return chalk.red(v)
   return v
