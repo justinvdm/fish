@@ -13,7 +13,7 @@ $ npm install -g fish-js
 
 Add a `.fish.yaml` file to your `$HOME` directory (see [`.fish.example.yaml`](https://github.com/justinvdm/fish/blob/master/.fish.example.yaml) for an example).
 
-Then run on fish on a csv file:
+Then run `fish` on a csv file:
 
 ```
 $ fish data.csv
