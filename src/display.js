@@ -51,13 +51,18 @@ function row(tag, summary) {
     chalk.bold(tag),
     val(summary.credit),
     val(summary.debit),
-    val(summary.balance)
+    balanceVal(summary.balance)
   ]
 }
 
 
 function val(v) {
-  var s = numeral(v).format('0,0.00')
+  return numeral(v).format('0,0.00')
+}
+
+
+function balanceVal(v) {
+  var s = val(v)
   v = +v
 
   if (v > 0) return chalk.green(s)
