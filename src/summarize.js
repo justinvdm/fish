@@ -7,22 +7,25 @@ var vv = require('drainpipe'),
     filter = lodash.filter
     flatten = lodash.flatten,
     mapValues = lodash.mapValues,
-    difference = lodash.difference
+    difference = lodash.difference,
+    push = Array.prototype.push
 
 
 function summarize(data, conf) {
   var groups = group(data, conf.tags)
-  var unaccounted = remainder(data, groups)
-
-  if (unaccounted.length) {
-    groups.unaccounted = (groups.unaccounted || []).concat(unaccounted)
-  }
-
+  handleUnaccounted(data, groups, conf)
   return mapValues(groups, summarizeGroup)
 }
 
 
-function remainder(data, groups) {
+function handleUnaccounted(data, groups, conf) {
+  var unaccounted = groups[conf.fallbackTag] || []
+  extend(unaccounted, gatherUnaccounted(data, groups))
+  if (unaccounted.length) groups[conf.fallbackTag] = unaccounted
+}
+
+
+function gatherUnaccounted(data, groups) {
   return difference(data, vv(groups)
     (values)
     (flatten)
@@ -81,6 +84,12 @@ function matches(s, data) {
 
 function regex(s) {
   return new RegExp(s, 'i')
+}
+
+
+function extend(target, source) {
+  push.apply(target, source)
+  return target
 }
 
 

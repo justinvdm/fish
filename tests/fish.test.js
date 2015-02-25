@@ -122,6 +122,24 @@ describe("fish api", function() {
         })
     })
 
+    it("should support a configurable name for unaccounted data", function() {
+      vv([{
+          amount: 123,
+          description: 'foo'
+        }, {
+          amount: -789,
+          description: 'quux'
+        }])
+        (fish, {fallbackTag: 'other'})
+        (assert.deepEqual, {
+          other: {
+            credit: 123,
+            debit: -789,
+            balance: -666
+          }
+        })
+    })
+
     it("should ignore case when matching tag strings", function() {
       vv([{
           amount: 123,

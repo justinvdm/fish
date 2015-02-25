@@ -10,7 +10,8 @@ function fish(data, conf) {
     fields: {
       amount: 'amount',
       description: 'description'
-    }
+    },
+    fallbackTag: 'unaccounted'
   })
 
   return summarize(normalize(data, conf), conf)
