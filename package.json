@@ -1,6 +1,6 @@
 {
   "name": "fish-js",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "a cli thing for sorting out personal finance",
   "main": "src/index.js",
   "bin": {
