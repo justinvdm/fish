@@ -1,8 +1,7 @@
-var defaults = require('lodash').defaults,
-    parse = require('csv').parse,
-    normalize = require('./normalize'),
-    summarize = require('./summarize')
-
+var defaults = require('lodash').defaults
+var parse = require('csv').parse
+var normalize = require('./normalize')
+var summarize = require('./summarize')
 
 function fish(data, conf) {
   conf = defaults(conf || {}, {
@@ -17,7 +16,6 @@ function fish(data, conf) {
   return summarize(normalize(data, conf), conf)
 }
 
-
 function csv(data, conf, done) {
   if (arguments.length < 3) {
     done = conf
@@ -27,17 +25,19 @@ function csv(data, conf, done) {
   var opts = conf.csv || {}
   opts.columns = true
 
-  parse(data, opts, function(err, data) {
+  parse(data, opts, function (err, data) {
     if (err) return done(err)
 
     var result
-    try { result = fish(data, conf) }
-    catch(e) { done(e) }
+    try {
+      result = fish(data, conf)
+    } catch (e) {
+      done(e)
+    }
 
     done(null, result)
   })
 }
-
 
 fish.csv = csv
 module.exports = fish

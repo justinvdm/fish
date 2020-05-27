@@ -1,15 +1,14 @@
-var vv = require('drainpipe'),
-    lodash = require('lodash'),
-    map = lodash.map,
-    uniq = lodash.uniq,
-    values = lodash.values
-    reduce = lodash.reduce,
-    filter = lodash.filter
-    flatten = lodash.flatten,
-    mapValues = lodash.mapValues,
-    difference = lodash.difference,
-    push = Array.prototype.push
+var vv = require('drainpipe')
+var map = require('lodash/map')
+var uniq = require('lodash/uniq')
+var values = require('lodash/values')
+var reduce = require('lodash/reduce')
+var filter = require('lodash/filter')
+var flatten = require('lodash/flatten')
+var mapValues = require('lodash/mapValues')
+var difference = require('lodash/difference')
 
+var push = Array.prototype.push
 
 function summarize(data, conf) {
   var groups = group(data, conf.tags)
@@ -17,22 +16,15 @@ function summarize(data, conf) {
   return mapValues(groups, summarizeGroup)
 }
 
-
 function handleUnaccounted(data, groups, conf) {
   var unaccounted = groups[conf.fallbackTag] || []
   extend(unaccounted, gatherUnaccounted(data, groups))
   if (unaccounted.length) groups[conf.fallbackTag] = unaccounted
 }
 
-
 function gatherUnaccounted(data, groups) {
-  return difference(data, vv(groups)
-    (values)
-    (flatten)
-    (uniq)
-    ())
+  return difference(data, vv(groups)(values)(flatten)(uniq)())
 }
-
 
 function summarizeGroup(data) {
   return reduce(data, sum, {
@@ -42,20 +34,16 @@ function summarizeGroup(data) {
   })
 }
 
-
 function group(data, tags) {
-  return mapValues(tags, function(strings) {
-    var tagData = vv(strings)
-      (map, function(s) { return matches(s, data) })
-      (flatten)
-      (uniq)
-      ()
+  return mapValues(tags, function (strings) {
+    var tagData = vv(strings)(map, function (s) {
+      return matches(s, data)
+    })(flatten)(uniq)()
 
     data = difference(data, tagData)
     return tagData
   })
 }
-
 
 function sum(current, d) {
   var amount = d.amount
@@ -72,25 +60,21 @@ function sum(current, d) {
   return result
 }
 
-
 function matches(s, data) {
   var re = regex(s)
 
-  return filter(data, function(d) {
+  return filter(data, function (d) {
     return re.test(d.description)
   })
 }
-
 
 function regex(s) {
   return new RegExp(s, 'i')
 }
 
-
 function extend(target, source) {
   push.apply(target, source)
   return target
 }
-
 
 module.exports = summarize

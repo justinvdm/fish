@@ -1,11 +1,10 @@
-var vv = require('drainpipe'),
-    map = require('lodash').map,
-    each = require('lodash').each,
-    reduce = require('lodash').reduce,
-    chalk = require('chalk'),
-    numeral = require('numeral'),
-    Table = require('cli-table')
-
+var vv = require('drainpipe')
+var map = require('lodash').map
+var each = require('lodash').each
+var reduce = require('lodash').reduce
+var chalk = require('chalk')
+var numeral = require('numeral')
+var Table = require('cli-table')
 
 function display(data) {
   var table = new Table({
@@ -17,32 +16,30 @@ function display(data) {
     }
   })
 
-  vv(data)
-    (map, function(d, k) { return row(k, d) })
-    (pushTo, table)
+  vv(data)(map, function (d, k) {
+    return row(k, d)
+  })(pushTo, table)
 
-  table.push(row('total', {
-    debit: sum(data, 'debit'),
-    credit: sum(data, 'credit'),
-    balance: sum(data, 'balance')
-  }))
+  table.push(
+    row('total', {
+      debit: sum(data, 'debit'),
+      credit: sum(data, 'credit'),
+      balance: sum(data, 'balance')
+    })
+  )
 
   console.log(table.toString())
 }
 
-
 function sum(data, name) {
-  return vv(data)
-    (map, function(d) { return d[name] })
-    (reduce, add, 0)
-    ()
+  return vv(data)(map, function (d) {
+    return d[name]
+  })(reduce, add, 0)()
 }
-
 
 function add(a, b) {
   return a + b
 }
-
 
 function row(tag, summary) {
   tag = tag || ''
@@ -55,11 +52,9 @@ function row(tag, summary) {
   ]
 }
 
-
 function val(v) {
   return numeral(v).format('0,0.00')
 }
-
 
 function balanceVal(v) {
   var s = val(v)
@@ -70,10 +65,10 @@ function balanceVal(v) {
   return s
 }
 
-
 function pushTo(data, arr) {
-  each(data, function(d) { arr.push(d) })
+  each(data, function (d) {
+    arr.push(d)
+  })
 }
-
 
 module.exports = display
