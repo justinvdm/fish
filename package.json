@@ -40,7 +40,7 @@
     "@oftherivier/tools": "^0.1.36"
   },
   "dependencies": {
-    "chalk": "^1.0.0",
+    "chalk": "^4.0.0",
     "cli-table": "^0.3.1",
     "csv": "^0.4.1",
     "drainpipe": "^0.1.0",
