@@ -2,26 +2,43 @@
   "name": "fish-js",
   "version": "0.1.5",
   "description": "a cli thing for sorting out personal finance",
+  "type": "commonjs",
   "main": "src/index.js",
   "bin": {
     "fish": "./src/cli.js"
   },
   "scripts": {
-    "test": "mocha -R spec tests/**/*.test.js"
+    "build": "otr build",
+    "lint": "otr lint",
+    "format": "otr format",
+    "test": "otr test",
+    "release": "otr release",
+    "typetest": "otr typetest",
+    "checks": "yarn lint && yarn typetest && yarn test"
   },
   "author": "justinvdm",
   "license": "MIT",
-  "devDependencies": {
-    "mocha": "^2.1.0",
-    "shelljs": "^0.3.0"
-  },
   "repository": {
     "type": "git",
     "url": "git://github.com/justinvdm/fish.git"
   },
   "keywords": [
-    "personal finance"
+    "personal",
+    "finance"
   ],
+  "oftherivier": {
+    "type": "vanilla",
+    "src": "src/index.js"
+  },
+  "renovate": {
+    "extends": [
+      "github>oftherivier/tools"
+    ]
+  },
+  "devDependencies": {
+    "shelljs": "^0.3.0",
+    "@oftherivier/tools": "^0.1.36"
+  },
   "dependencies": {
     "chalk": "^1.0.0",
     "cli-table": "^0.3.1",

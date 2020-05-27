@@ -1,37 +1,30 @@
-var vv = require('drainpipe'),
-    assert = require('assert'),
-    resolve = require('path').resolve,
-    parse = JSON.parse,
-    str = require('util').format,
-    exec = require('shelljs').exec
-
+const vv = require('drainpipe')
+const resolve = require('path').resolve
+const parse = JSON.parse
+const str = require('util').format
+const exec = require('shelljs').exec
+const it = require('ava')
 
 function run(cmd) {
-  var filename = resolve(__dirname, '..', 'src', 'cli.js');
-  cmd = ['node', filename, cmd].join(' ');
-  return exec(cmd, {silent: true}).output;
+  const filename = resolve(__dirname, '..', 'src', 'cli.js')
+  cmd = ['node', filename, cmd].join(' ')
+  return exec(cmd, { silent: true }).output
 }
 
+it('should display the summary', t => {
+  const config = resolve(__dirname, 'fixtures/basic/.fish.yaml')
+  const file = resolve(__dirname, 'fixtures/basic/data.csv')
 
-describe("fish cli", function() {
-  it("should display the summary", function() {
-    var config = resolve(__dirname, 'fixtures/basic/.fish.yaml')
-    var file = resolve(__dirname, 'fixtures/basic/data.csv')
-
-    vv(str('--json -c %s %s', config, file))
-      (run)
-      (parse)
-      (assert.deepEqual, {
-        a: {
-          credit: 3,
-          debit: -23,
-          balance: -20
-        },
-        b: {
-          credit: 20,
-          debit: 0,
-          balance: 20
-        }
-      })
+  vv(str('--json -c %s %s', config, file))(run)(parse)(t.deepEqual, {
+    a: {
+      credit: 3,
+      debit: -23,
+      balance: -20
+    },
+    b: {
+      credit: 20,
+      debit: 0,
+      balance: 20
+    }
   })
 })
